@@ -1,12 +1,7 @@
-// fortune cookies delivery
-var fortunes = [
-  "Conquer your fears or they will conquer you.",
-  "Rivers need springs.",
-  "Do not fear what you don't know.",
-  "You will have a pleasant surprise.",
-  "Whenever possible, keep it simple.",
-];
+// ./. tells node not to look in the node_modules dir
+var fortune = require("./lib/fortune.js");
 
+// require: node function for importing a module
 var express = require("express");
 var app = express();
 
@@ -28,8 +23,8 @@ app.get("/", function (req, res) {
   res.render("home");
 });
 app.get("/about", function (req, res) {
-  var randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
-  res.render("about", { fortune: randomFortune });
+  //   var randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+  res.render("about", { fortune: fortune.getFortune() });
 });
 
 // use: handling middlewares --> order of def routes is important!
